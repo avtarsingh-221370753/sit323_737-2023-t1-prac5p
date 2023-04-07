@@ -4,3 +4,9 @@ services:
     image: my-web-app
     ports:
       - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:5000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
